@@ -5,5 +5,5 @@
 
 html,
 body {
-  @apply bg-background text-text;
+  @apply bg-background text-text overflow-x-hidden;
 }

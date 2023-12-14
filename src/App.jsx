@@ -24,27 +24,14 @@ const App = () => {
       const team = [shuffledPlayers[i], shuffledPlayers[i + 1]];
       teams.push(team);
     }
-
     return teams;
-  };
-
-  const extractPseudonyms = (players) => {
-    return players
-      .split("\n")
-      .map((line) => line.trim())
-      .filter(Boolean)
-      .map((playerInfo) => {
-        const words = playerInfo.split(" ");
-        return words.slice(0, words.length - 4).join(" ");
-      })
-      .filter(Boolean);
   };
 
   const generateTeams = () => {
     if (!active) return;
     setActive(false);
     setTeams([]);
-    const pseudonyms = extractPseudonyms(playerInput);
+    const pseudonyms = playerInput.split("\n").filter((player) => !player.includes(":")).map((player) => player.split("#")[0].trim()).filter(Boolean);
     const generatedTeams = createTeams(pseudonyms);
 
     const delayBetweenTeams = 1500;
