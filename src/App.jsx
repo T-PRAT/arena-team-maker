@@ -2,7 +2,7 @@ import { useState } from "react";
 import dice from "./assets/dice.svg";
 
 
-const Team = ({ team, index }) => {
+const Team = ({ team }) => {
   return (
     <div className="grid grid-cols-2 text-center">
       <p className={`border p-4 rounded-l-lg  bg-primary/10 animate-slideL delay-100`}>{team[0]}</p>
@@ -61,7 +61,7 @@ const App = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto mt-8 p-6 bg-white rounded shadow-md">
+    <div className="max-w-2xl mx-auto mt-8 p-6 bg-white rounded">
       <h1 className="text-4xl font-bold mb-4">Arena Team Maker</h1>
       <textarea
         id="playerInput"
@@ -80,7 +80,7 @@ const App = () => {
 
       <div className="mt-6 grid grid-cols-1 space-y-8">
         {teams.map((team, index) => (
-          <Team key={index} team={team} index={index} />
+          <Team key={index} team={team} />
         ))}
       </div>
     </div>
