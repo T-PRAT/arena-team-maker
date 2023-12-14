@@ -16,7 +16,22 @@ export default {
     fontFamily: {
       'sans': ['Righteous', 'Roboto', 'sans-serif'],
     },
-    extend: {},
+    extend: {
+      keyframes: {
+        slideR: {
+          "0%": { opacity: 0, transform: "translateX(100%)" },
+          "100%": { opacity: 1, transform: "translateX(0)" }
+        },
+        slideL: {
+          "0%": { opacity: 0, transform: "translateX(-100%)" },
+          "100%": { opacity: 1, transform: "translateX(0)" }
+        }
+      },
+      animation: {
+        slideR: "slideR 1s ease-in-out forwards",
+        slideL: "slideL 1s ease-in-out forwards"
+      }
+    },
   },
   plugins: [],
 }

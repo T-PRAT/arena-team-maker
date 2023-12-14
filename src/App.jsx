@@ -2,14 +2,19 @@ import { useState } from "react";
 import dice from "./assets/dice.svg";
 
 
-const Team = ({ team }) => <div className="p-4 border grid grid-cols-2 text-center m-2 rounded-lg">
-  <p>{team[0]}</p>
-  <p>{team[1]}</p>
-</div>;
+const Team = ({ team, index }) => {
+  return (
+    <div className="grid grid-cols-2 text-center">
+      <p className={`border p-4 rounded-l-lg  bg-primary/10 animate-slideL delay-100`}>{team[0]}</p>
+      <p className="border p-4 rounded-r-lg bg-primary/10 animate-slideR">{team[1]}</p>
+    </div >
+  )
+};
 
 const App = () => {
   const [playerInput, setPlayerInput] = useState("");
   const [teams, setTeams] = useState([]);
+  const [active, setActive] = useState(true);
 
   const createTeams = (pseudonyms) => {
     const shuffledPlayers = pseudonyms.sort(() => Math.random() - 0.5);
@@ -36,9 +41,23 @@ const App = () => {
   };
 
   const generateTeams = () => {
+    if (!active) return;
+    setActive(false);
+    setTeams([]);
     const pseudonyms = extractPseudonyms(playerInput);
     const generatedTeams = createTeams(pseudonyms);
-    setTeams(generatedTeams);
+
+    const delayBetweenTeams = 1500;
+
+    generatedTeams.forEach((team, index) => {
+      setTimeout(() => {
+        setTeams((teams) => [...teams, team]);
+      }, index * delayBetweenTeams);
+    }
+    );
+    setTimeout(() => {
+      setActive(true);
+    }, generatedTeams.length * delayBetweenTeams);
   };
 
   return (
@@ -59,9 +78,9 @@ const App = () => {
         </span>
       </button>
 
-      <div className="mt-6 grid grid-cols-2">
+      <div className="mt-6 grid grid-cols-1 space-y-8">
         {teams.map((team, index) => (
-          <Team key={index} team={team} />
+          <Team key={index} team={team} index={index} />
         ))}
       </div>
     </div>
