@@ -2,14 +2,6 @@ import { useState } from "react";
 import dice from "./assets/dice.svg";
 
 
-const Team = ({ team }) => {
-  return (
-    <div className="grid grid-cols-2 text-center">
-      <p className={`border p-4 rounded-l-lg  bg-primary/10 animate-slideL delay-100`}>{team[0]}</p>
-      <p className="border p-4 rounded-r-lg bg-primary/10 animate-slideR">{team[1]}</p>
-    </div >
-  )
-};
 
 const App = () => {
   const [playerInput, setPlayerInput] = useState("");
@@ -49,7 +41,7 @@ const App = () => {
 
   return (
     <div className="max-w-2xl mx-auto mt-8 p-6 bg-white rounded">
-      <h1 className="text-4xl font-bold mb-4">Arena Team Maker</h1>
+      <h1 className="text-4xl font-bold mt-8 mb-4">Arena Team Maker</h1>
       <textarea
         id="playerInput"
         rows="4"
@@ -59,15 +51,18 @@ const App = () => {
         onChange={(e) => setPlayerInput(e.target.value)}
       ></textarea>
       <button onClick={generateTeams} className="bg-primary text-background text-lg py-2 px-4 rounded mt-4 hover:bg-secondary flex">
-        Generate Teams
+        <span className="my-auto">Generate Teams</span>
         <span className="ml-2">
-          <img src={dice} alt="dice" className="w-6 h-6" />
+          <img src={dice} alt="dice" className="w-12 h-10" />
         </span>
       </button>
 
       <div className="mt-6 grid grid-cols-1 space-y-8">
         {teams.map((team, index) => (
-          <Team key={index} team={team} />
+          <div className="grid grid-cols-2 text-center" key={index}>
+            <p className={`border p-4 rounded-l-lg  bg-primary/10 animate-slideL delay-100`}>{team[0]}</p>
+            <p className="border p-4 rounded-r-lg bg-primary/10 animate-slideR">{team[1]}</p>
+          </div >
         ))}
       </div>
     </div>
