@@ -23,7 +23,7 @@ const App = () => {
     if (!active) return;
     setActive(false);
     setTeams([]);
-    const pseudonyms = playerInput.split("\n").filter((player) => !player.includes(":")).map((player) => player.split("#")[0].trim()).filter(Boolean);
+    const pseudonyms = playerInput.split("\n").filter((player) => !player.includes(":")).filter((player) => player.includes("#")).map((player) => player.split("#")[0].trim()).filter(Boolean);
     const generatedTeams = createTeams(pseudonyms);
 
     const delayBetweenTeams = 1500;
